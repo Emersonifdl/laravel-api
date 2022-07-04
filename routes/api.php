@@ -10,7 +10,8 @@ Route::name('api.')->group(function () {
             Route::post('login', 'login')->name('login');
             Route::post('logout', 'logout')->name('logout');
             Route::post('refresh', 'refresh')->name('refresh');
-
+            Route::post('forgot-password', 'forgotPassword')->name('forgot-password');
+            Route::post('reset-password', 'resetPassword')->name('reset-password');
             Route::get('me', 'me')->middleware(['auth:api'])->name('me');
         });
         #endregion
