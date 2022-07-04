@@ -10,7 +10,9 @@ Route::name('api.')->group(function () {
             Route::post('login', 'login')->name('login');
             Route::post('logout', 'logout')->name('logout');
             Route::post('refresh', 'refresh')->name('refresh');
-            Route::get('me', 'me')->name('me');
+            Route::middleware(['auth:api'])->group(function () {
+                Route::get('me', 'me')->name('me');
+            });
         });
         #endregion
     });
