@@ -14,8 +14,11 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (! $token = auth()->attempt($validated)) {
-            return response()->json(['message' => 'Sorry, the email or password is incorrect.'], Response::HTTP_UNAUTHORIZED);
+        if (!$token = auth()->attempt($validated)) {
+            return response()->json(
+                ['message' => 'Sorry, the email or password is incorrect.'],
+                Response::HTTP_UNAUTHORIZED
+            );
         }
 
         return $this->respondWithToken($token);
@@ -37,8 +40,8 @@ class AuthController extends Controller
     {
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'token_type'   => 'bearer',
+            'expires_in'   => auth()->factory()->getTTL() * 60,
         ]);
     }
 }

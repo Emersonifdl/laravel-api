@@ -15,6 +15,7 @@ class MeTest extends TestCase
 
         $this->user = User::factory()->create();
     }
+
     /** @test */
     public function it_should_not_be_able_to_show_user_profile_without_being_authenticated()
     {
@@ -29,9 +30,9 @@ class MeTest extends TestCase
             ->getJson(route('api.auth.me'))
             ->assertOk()
             ->assertJsonFragment([
-                'id'           => $this->user->id,
-                'name'   => $this->user->name,
-                'email'        => $this->user->email,
+                'id'    => $this->user->id,
+                'name'  => $this->user->name,
+                'email' => $this->user->email,
             ]);
     }
 }
