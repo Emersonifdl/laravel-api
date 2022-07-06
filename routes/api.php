@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('api.')->group(function () {
@@ -10,9 +11,15 @@ Route::name('api.')->group(function () {
             Route::post('login', 'login')->name('login');
             Route::post('logout', 'logout')->name('logout');
             Route::post('refresh', 'refresh')->name('refresh');
-            Route::post('forgot-password', 'forgotPassword')->name('forgot-password');
-            Route::post('reset-password', 'resetPassword')->name('reset-password');
-            Route::get('me', 'me')->middleware(['auth:api'])->name('me');
+        });
+        #endregion
+    });
+
+    Route::middleware(['auth:api'])->group(function () {
+        #region Profile
+        Route::controller(ProfileController::class)->name('profile.')->group(function () {
+            Route::get('/profile', 'me')->name('me');
+            Route::get('/profile/{user}', 'show')->name('show');
         });
         #endregion
     });
