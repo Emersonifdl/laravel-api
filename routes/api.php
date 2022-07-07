@@ -22,5 +22,9 @@ Route::name('api.')->group(function () {
             Route::get('/profile/{user}', 'show')->name('show');
         });
         #endregion
+
+        #region People
+        Route::apiResource('people', PersonController::class);
+        #endregion
     });
 });
